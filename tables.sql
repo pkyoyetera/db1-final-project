@@ -1,6 +1,6 @@
 
 -- What makes an address?
-CREATE OR REPLACE TYPE ADDRESS AS OBJECT (
+CREATE OR REPLACE TYPE ADDRESS_T AS OBJECT (
     street              VARCHAR(40),
     city                VARCHAR(30),
     state               CHAR(2),
@@ -11,7 +11,7 @@ CREATE OR REPLACE TYPE ADDRESS AS OBJECT (
 CREATE OR REPLACE TYPE PERSON AS OBJECT (
     ssn                 VARCHAR(20),
     name                VARCHAR (30),
-    address             ADDRESS
+    address             ADDRESS_T
 ) NOT FINAL;
 -- REF FROM  (SSN);
 
