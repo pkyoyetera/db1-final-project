@@ -30,3 +30,17 @@ CREATE TABLE Customers (
 
     PRIMARY KEY (customer_id)
 );
+
+
+-- Attempt to insert a dummy author
+INSERT INTO
+Authors (author_id, person_data)
+VALUES ('4410',
+        PERSON('12-12-12',
+               'Honorebel',
+               ADDRESS_T('Main St.',
+                         'Boston',
+                         'MA',
+                         '01231')
+              )
+        );
