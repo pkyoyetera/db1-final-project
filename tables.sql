@@ -26,7 +26,7 @@ CREATE TABLE Authors (
 -- A table for customers
 CREATE TABLE Customers (
     customer_id             INT         NOT NULL,  -- fixme, VARCHAR not INT?
-    person_data     REF     PERSON,
+    person_data   /*REF*/   PERSON,
 
     PRIMARY KEY (customer_id)
 );
