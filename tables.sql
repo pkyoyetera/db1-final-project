@@ -44,3 +44,26 @@ VALUES ('4410',
                          '01231')
               )
         );
+
+
+-- Publishing house table
+CREATE TABLE Publisher (
+    name                VARCHAR(30)     NOT NULL,
+    city                VARCHAR(20)     NOT NULL,
+
+    PRIMARY KEY (name, city)
+);
+
+CREATE TABLE Books (
+    isbn                VARCHAR(25)     NOT NULL,
+    title               VARCHAR(50)     NOT NULL,
+    author_id           INT,
+    publisher_id        INT,
+
+    PRIMARY KEY (isbn),
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id),
+    FOREIGN KEY (publisher_id) REFERENCES Publisher(name, city)  -- fixme we should probably use an ID for publisher
+);
+
+
+/*  Attempt to insert data into tables above */
