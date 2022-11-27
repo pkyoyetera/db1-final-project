@@ -55,9 +55,11 @@ CREATE TABLE Publisher (
     PRIMARY KEY (publisher_id)
 );
 
+-- Describe books table
 CREATE TABLE Books (
     isbn                VARCHAR(25)     NOT NULL,
     title               VARCHAR(50)     NOT NULL,
+    price               FLOAT,
     author_id           INT,
     publisher_id        INT,
 
