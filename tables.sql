@@ -48,10 +48,11 @@ VALUES ('4410',
 
 -- Publishing house table
 CREATE TABLE Publisher (
-    name                VARCHAR(30)     NOT NULL,
-    city                VARCHAR(20)     NOT NULL,
+    publisher_id        INT             NOT NULL,
+    name                VARCHAR(30),
+    city                VARCHAR(20),
 
-    PRIMARY KEY (name, city)
+    PRIMARY KEY (publisher_id)
 );
 
 CREATE TABLE Books (
@@ -62,8 +63,9 @@ CREATE TABLE Books (
 
     PRIMARY KEY (isbn),
     FOREIGN KEY (author_id) REFERENCES Authors(author_id),
-    FOREIGN KEY (publisher_id) REFERENCES Publisher(name, city)  -- fixme we should probably use an ID for publisher
+    FOREIGN KEY (publisher_id) REFERENCES Publisher(publisher_id)
 );
+
 
 
 /*  Attempt to insert data into tables above */
