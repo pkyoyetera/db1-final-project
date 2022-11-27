@@ -36,7 +36,7 @@ CREATE TABLE Customers (
 INSERT INTO
 Authors (author_id, person_data)
 VALUES ('4410',
-        PERSON('12-12-12',
+        PERSON('12-12-12',  -- fixme probably want to set a proper format for SSN
                'Honorebel',
                ADDRESS_T('Main St.',
                          'Boston',
