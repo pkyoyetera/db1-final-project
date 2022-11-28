@@ -80,4 +80,15 @@ CREATE TABLE Writes (
 );
 
 
-/*  Attempt to insert data into tables above */
+-- Authors relationship set
+CREATE TABLE Orders (
+    order_id            INT             NOT NULL,
+    customer_id         INT             NOT NULL,
+    isbn                VARCHAR(25)     NOT NULL,
+    price               FLOAT           NOT NULL,
+    time                DATE            NOT NULL,
+
+    PRIMARY KEY (order_id),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (isbn) REFERENCES Books(isbn)
+);
