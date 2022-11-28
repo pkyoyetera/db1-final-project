@@ -68,6 +68,16 @@ CREATE TABLE Books (
     FOREIGN KEY (publisher_id) REFERENCES Publisher(publisher_id)
 );
 
+-- Writes relationship set
+CREATE TABLE Writes (
+    id                  INT             NOT NULL,
+    author_id           INT             NOT NULL,
+    isbn                VARCHAR(25)     NOT NULL,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id),
+    FOREIGN KEY (isbn) REFERENCES Books(isbn)
+);
 
 
 /*  Attempt to insert data into tables above */
