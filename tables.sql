@@ -8,13 +8,16 @@ CREATE OR REPLACE TYPE ADDRESS_T AS OBJECT (
 ) FINAL;
 
 
--- Type person will describe Authors and Customers.
-CREATE OR REPLACE TYPE PERSON AS OBJECT (
-    ssn                 VARCHAR(20),
-    name                VARCHAR (30),
-    address             ADDRESS_T
-) NOT FINAL;
--- REF FROM  (SSN);
+CREATE TABLE People (
+    person_id           INT                 NOT NULL,
+    ssn                 VARCHAR(11)         NOT NULL,
+    firstname           VARCHAR(30)         NOT NULL,
+    lastname            VARCHAR(30)         NOT NULL,
+    address             ADDRESS_T,
+
+    CONSTRAINT pk_people PRIMARY KEY (person_id)  -- give the primary key constraint for this table the name 'pk_people'
+);
+
 
 -- An Authors table
 CREATE TABLE Authors (
