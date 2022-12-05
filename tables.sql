@@ -39,51 +39,39 @@ CREATE TABLE Customers (
 );
 
 
--- Attempt to insert a dummy author
-INSERT INTO
-Authors (author_id, person_data)
-VALUES ('4410',
-        PERSON('12-12-12',  -- fixme probably want to set a proper format for SSN
-               'Honorebel',
-               ADDRESS_T('Main St.',
-                         'Boston',
-                         'MA',
-                         '01231')
-              )
-        );
-
-
 -- Publishing house table
 CREATE TABLE Publisher (
     publisher_id        INT             NOT NULL,
     name                VARCHAR(30),
     address             ADDRESS_T,
 
-    PRIMARY KEY (publisher_id)
+    CONSTRAINT pk_publisher PRIMARY KEY (publisher_id)
 );
 
 -- Describe books table
 CREATE TABLE Books (
-    isbn                VARCHAR(25)     NOT NULL,
+    book_id             INT             NOT NULL,
+    isbn                VARCHAR(13)     NOT NULL,
     title               VARCHAR(50)     NOT NULL,
     price               FLOAT,
     author_id           INT,
     publisher_id        INT,
 
-    PRIMARY KEY (isbn),
+    CONSTRAINT pk_books PRIMARY KEY (book_id),
     FOREIGN KEY (author_id) REFERENCES Authors(author_id),
     FOREIGN KEY (publisher_id) REFERENCES Publisher(publisher_id)
 );
+
 
 -- Writes relationship set
 CREATE TABLE Writes (
     id                  INT             NOT NULL,
     author_id           INT             NOT NULL,
-    isbn                VARCHAR(25)     NOT NULL,
+    book_id             INT             NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (author_id) REFERENCES Authors(author_id),
-    FOREIGN KEY (isbn) REFERENCES Books(isbn)
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
 
 
@@ -91,11 +79,11 @@ CREATE TABLE Writes (
 CREATE TABLE Orders (
     order_id            INT             NOT NULL,
     customer_id         INT             NOT NULL,
-    isbn                VARCHAR(25)     NOT NULL,
+    book_id             INT             NOT NULL,
     price               FLOAT           NOT NULL,
     time                DATE            NOT NULL,
 
     PRIMARY KEY (order_id),
     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
-    FOREIGN KEY (isbn) REFERENCES Books(isbn)
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
