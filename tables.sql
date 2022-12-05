@@ -51,7 +51,7 @@ CREATE TABLE Publisher (
 -- Describe books table
 CREATE TABLE Books (
     book_id             INT             NOT NULL,
-    isbn                VARCHAR(13)     NOT NULL,
+    isbn                VARCHAR(17)     NOT NULL,
     title               VARCHAR(50)     NOT NULL,
     price               FLOAT,
     author_id           INT,
@@ -142,8 +142,8 @@ INSERT ALL
                                                                        'Morrison',
                                                                        ADDRESS_T('1 Heaven Lane', 'Los Angeles', 'CA', '89923'))
 
-SELECT 1 FROM DUAL
-;
+SELECT 1 FROM DUAL;
+
 
 -- Insert authors into Authors table
 INSERT ALL
@@ -152,8 +152,8 @@ INSERT ALL
     INTO Authors (author_id, person_id) VALUES (328818, 7217)  -- T. Morrison
     INTO Authors (author_id, person_id) VALUES (123315, 8482)  -- E. Adebayor
     INTO Authors (author_id, person_id) VALUES (453112, 1183)  -- Octavia Butler
-SELECT 1 FROM DUAL
-;
+SELECT 1 FROM DUAL;
+
 
 -- Dummy Customers (not literally :) )
 INSERT ALL
@@ -161,15 +161,33 @@ INSERT ALL
     INTO Customers (customer_id, person_id) VALUES (93, 8482)
     INTO Customers (customer_id, person_id) VALUES (83, 7116)
     INTO Customers (customer_id, person_id) VALUES (46, 1010)
-SELECT 1 FROM DUAL
-;
+SELECT 1 FROM DUAL;
 
+
+-- Add some publishers
 INSERT ALL
     INTO Publisher (publisher_id, name, address) VALUES (432, 'Random House', ADDRESS_T('491 Dutton St', 'Lowellita', 'MA', 02323))
     INTO Publisher (publisher_id, name, address) VALUES (919, 'Hachette Book Group', ADDRESS_T('12 43W 13th St', 'New York City', 'NY', 05522))
     INTO Publisher (publisher_id, name, address) VALUES (623, 'Harper Collins', ADDRESS_T('8 Lumberg Drive', 'Lolapalooza', 'WA', 92344))
     INTO Publisher (publisher_id, name, address) VALUES (766, 'Macmillan', ADDRESS_T('7 Collins Lane', 'Franklin', 'MI', 44291))
     INTO Publisher (publisher_id, name, address) VALUES (221, 'Simon and Schuster', ADDRESS_T('9898 Winnnow Circle', 'Seattle', 'QA', 89892))
-SELECT 1 FROM DUAL
-;
+SELECT 1 FROM DUAL;
 
+
+-- Add some books
+INSERT ALL
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (3, '978-0-2257-7600-3', 'The Lost City of Culyan', 15.60, 435222, 432)
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (5, '978-5-0072-6605-5', 'The Hunger Games', 12.99, 123315, 623)
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (6, '978-0-743-26886-7', 'The Great Gasby', 14.99, 435222, 221)
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (8, '978-0-532-05686-5', 'Kindred', 10.99, 453112, 766)
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (2, '978-2-9753-4360-3', 'The Shining', 11.99, 151245, 766)
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (4, '978-2-5942-1677-7', 'It', 8.99, 151245, 919)
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (7, '978-0-532-05256-5', 'Pride and Prejudice', 13.99, 435222, 623)
+SELECT 1 FROM DUAL;
