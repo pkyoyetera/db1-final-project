@@ -21,18 +21,21 @@ CREATE TABLE People (
 
 -- An Authors table
 CREATE TABLE Authors (
-    author_id          INT         NOT NULL,  -- fixme, perhaps VARCHAR not INT?
-    person_data        PERSON,
+    author_id          INT              NOT NULL,
+    person_id          INT              NOT NULL,
 
-    PRIMARY KEY (author_id)
+    CONSTRAINT pk_authors PRIMARY KEY (author_id),
+    FOREIGN KEY (person_id) REFERENCES People (person_id)
 );
+
 
 -- A table for customers
 CREATE TABLE Customers (
-    customer_id             INT         NOT NULL,  -- fixme, VARCHAR not INT?
-    person_data   /*REF*/   PERSON,
+    customer_id        INT              NOT NULL,
+    person_id          INT              NOT NULL,
 
-    PRIMARY KEY (customer_id)
+    CONSTRAINT pk_customer PRIMARY KEY (customer_id),
+    FOREIGN KEY (person_id) REFERENCES People (person_id)
 );
 
 
