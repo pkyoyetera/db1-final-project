@@ -99,7 +99,7 @@ INSERT ALL
     INTO People (person_id, ssn, firstname, lastname, address) VALUES (2315,
                                                                        '213-11-2323',
                                                                        'Elizabeth',
-                                                                       'Blomvquist',
+                                                                       'Blomqvist',
                                                                        ADDRESS_T('Main St.', 'Boston', 'MA', '01231'))
     INTO People (person_id, ssn, firstname, lastname, address) VALUES (1010,
                                                                        '542-55-2377',
@@ -111,5 +111,65 @@ INSERT ALL
                                                                        'Steve',
                                                                        'Nash',
                                                                        ADDRESS_T('6531 Buckets St', 'San Diego', 'CA', '72043'))
+    INTO People (person_id, ssn, firstname, lastname, address) VALUES (6283,
+                                                                       '211-63-5247',
+                                                                       'Stephen',
+                                                                       'King',
+                                                                       ADDRESS_T('91 Ackers Boulevard', 'Gotham', 'NJ', '13994'))
+    INTO People (person_id, ssn, firstname, lastname, address) VALUES (7116,
+                                                                       '544-34-5637',
+                                                                       'Maile',
+                                                                       'Donaldson',
+                                                                       ADDRESS_T('882 Sit Avenue', 'Rotterdam', 'LV', '54222'))
+    INTO People (person_id, ssn, firstname, lastname, address) VALUES (1183,
+                                                                       '322-63-5247',
+                                                                       'Octavia',
+                                                                       'Butler',
+                                                                       ADDRESS_T('44 Bowling Lane', 'Jersey City', 'NJ', '13994'))
+    INTO People (person_id, ssn, firstname, lastname, address) VALUES (8482,
+                                                                       '889-52-1121',
+                                                                       'Emmanuel',
+                                                                       'Adebayor',
+                                                                       ADDRESS_T('2686 Bibendum St, Apt 12', 'Salt Lake City', 'UT', '89122'))
+    INTO People (person_id, ssn, firstname, lastname, address) VALUES (7771,
+                                                                       '213-63-6611',
+                                                                       'Bartlett',
+                                                                       'Giamatti',
+                                                                       ADDRESS_T('443 East Gardner Rd', 'Naperville', 'IL', '09331'))
+    INTO People (person_id, ssn, firstname, lastname, address) VALUES (7217,
+                                                                       '777-01-1100',
+                                                                       'Toni',
+                                                                       'Morrison',
+                                                                       ADDRESS_T('1 Heaven Lane', 'Los Angeles', 'CA', '89923'))
+
 SELECT 1 FROM DUAL
 ;
+
+-- Insert authors into Authors table
+INSERT ALL
+    INTO Authors (author_id, person_id) VALUES (151245, 6283)  -- Stephen King
+    INTO Authors (author_id, person_id) VALUES (435222, 2315)  -- Beth Blomqvist
+    INTO Authors (author_id, person_id) VALUES (328818, 7217)  -- T. Morrison
+    INTO Authors (author_id, person_id) VALUES (123315, 8482)  -- E. Adebayor
+    INTO Authors (author_id, person_id) VALUES (453112, 1183)  -- Octavia Butler
+SELECT 1 FROM DUAL
+;
+
+-- Dummy Customers (not literally :) )
+INSERT ALL
+    INTO Customers (customer_id, person_id) VALUES (55, 7771)
+    INTO Customers (customer_id, person_id) VALUES (93, 8482)
+    INTO Customers (customer_id, person_id) VALUES (83, 7116)
+    INTO Customers (customer_id, person_id) VALUES (46, 1010)
+SELECT 1 FROM DUAL
+;
+
+INSERT ALL
+    INTO Publisher (publisher_id, name, address) VALUES (432, 'Random House', ADDRESS_T('491 Dutton St', 'Lowellita', 'MA', 02323))
+    INTO Publisher (publisher_id, name, address) VALUES (919, 'Hachette Book Group', ADDRESS_T('12 43W 13th St', 'New York City', 'NY', 05522))
+    INTO Publisher (publisher_id, name, address) VALUES (623, 'Harper Collins', ADDRESS_T('8 Lumberg Drive', 'Lolapalooza', 'WA', 92344))
+    INTO Publisher (publisher_id, name, address) VALUES (766, 'Macmillan', ADDRESS_T('7 Collins Lane', 'Franklin', 'MI', 44291))
+    INTO Publisher (publisher_id, name, address) VALUES (221, 'Simon and Schuster', ADDRESS_T('9898 Winnnow Circle', 'Seattle', 'QA', 89892))
+SELECT 1 FROM DUAL
+;
+
