@@ -87,3 +87,29 @@ CREATE TABLE Orders (
     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
     FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
+
+
+-- Insert People into database
+INSERT ALL
+    INTO People (person_id, ssn, firstname, lastname, address) VALUES (2314,
+                                                                       '111-22-3333',
+                                                                       'Alexander',
+                                                                       'McQueen',
+                                                                       ADDRESS_T('10 School St.', 'Devens', 'MA', '03020'))
+    INTO People (person_id, ssn, firstname, lastname, address) VALUES (2315,
+                                                                       '213-11-2323',
+                                                                       'Elizabeth',
+                                                                       'Blomvquist',
+                                                                       ADDRESS_T('Main St.', 'Boston', 'MA', '01231'))
+    INTO People (person_id, ssn, firstname, lastname, address) VALUES (1010,
+                                                                       '542-55-2377',
+                                                                       'Tony',
+                                                                       'Stark',
+                                                                       ADDRESS_T('1 Avengers Sq', 'New York', 'NY', '07023'))
+    INTO People (person_id, ssn, firstname, lastname, address) VALUES (8383,
+                                                                       '432-56-2321',
+                                                                       'Steve',
+                                                                       'Nash',
+                                                                       ADDRESS_T('6531 Buckets St', 'San Diego', 'CA', '72043'))
+SELECT 1 FROM DUAL
+;
