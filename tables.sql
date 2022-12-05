@@ -5,7 +5,8 @@ CREATE OR REPLACE TYPE ADDRESS_T AS OBJECT (
     city                VARCHAR(30),
     state               CHAR(2),
     zip_code            CHAR(5)
-) NOT FINAL;
+) FINAL;
+
 
 -- Type person will describe Authors and Customers.
 CREATE OR REPLACE TYPE PERSON AS OBJECT (
