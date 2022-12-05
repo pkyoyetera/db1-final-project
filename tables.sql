@@ -57,7 +57,7 @@ VALUES ('4410',
 CREATE TABLE Publisher (
     publisher_id        INT             NOT NULL,
     name                VARCHAR(30),
-    city                VARCHAR(20),
+    address             ADDRESS_T,
 
     PRIMARY KEY (publisher_id)
 );
