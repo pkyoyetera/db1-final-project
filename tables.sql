@@ -5,78 +5,73 @@ CREATE OR REPLACE TYPE ADDRESS_T AS OBJECT (
     city                VARCHAR(30),
     state               CHAR(2),
     zip_code            CHAR(5)
-) NOT FINAL;
+) FINAL;
 
--- Type person will describe Authors and Customers.
-CREATE OR REPLACE TYPE PERSON AS OBJECT (
-    ssn                 VARCHAR(20),
-    name                VARCHAR (30),
-    address             ADDRESS_T
-) NOT FINAL;
--- REF FROM  (SSN);
+
+CREATE TABLE People (
+    person_id           INT                 NOT NULL,
+    ssn                 VARCHAR(11)         NOT NULL,
+    firstname           VARCHAR(30)         NOT NULL,
+    lastname            VARCHAR(30)         NOT NULL,
+    address             ADDRESS_T,
+
+    CONSTRAINT pk_people PRIMARY KEY (person_id)  -- give the primary key constraint for this table the name 'pk_people'
+);
+
 
 -- An Authors table
 CREATE TABLE Authors (
-    author_id          INT         NOT NULL,  -- fixme, perhaps VARCHAR not INT?
-    person_data        PERSON,
+    author_id          INT              NOT NULL,
+    person_id          INT              NOT NULL,
 
-    PRIMARY KEY (author_id)
+    CONSTRAINT pk_authors PRIMARY KEY (author_id),
+    FOREIGN KEY (person_id) REFERENCES People (person_id)
 );
+
 
 -- A table for customers
 CREATE TABLE Customers (
-    customer_id             INT         NOT NULL,  -- fixme, VARCHAR not INT?
-    person_data   /*REF*/   PERSON,
+    customer_id        INT              NOT NULL,
+    person_id          INT              NOT NULL,
 
-    PRIMARY KEY (customer_id)
+    CONSTRAINT pk_customer PRIMARY KEY (customer_id),
+    FOREIGN KEY (person_id) REFERENCES People (person_id)
 );
-
-
--- Attempt to insert a dummy author
-INSERT INTO
-Authors (author_id, person_data)
-VALUES ('4410',
-        PERSON('12-12-12',  -- fixme probably want to set a proper format for SSN
-               'Honorebel',
-               ADDRESS_T('Main St.',
-                         'Boston',
-                         'MA',
-                         '01231')
-              )
-        );
 
 
 -- Publishing house table
 CREATE TABLE Publisher (
     publisher_id        INT             NOT NULL,
     name                VARCHAR(30),
-    city                VARCHAR(20),
+    address             ADDRESS_T,
 
-    PRIMARY KEY (publisher_id)
+    CONSTRAINT pk_publisher PRIMARY KEY (publisher_id)
 );
 
 -- Describe books table
 CREATE TABLE Books (
-    isbn                VARCHAR(25)     NOT NULL,
+    book_id             INT             NOT NULL,
+    isbn                VARCHAR(17)     NOT NULL,
     title               VARCHAR(50)     NOT NULL,
     price               FLOAT,
     author_id           INT,
     publisher_id        INT,
 
-    PRIMARY KEY (isbn),
+    CONSTRAINT pk_books PRIMARY KEY (book_id),
     FOREIGN KEY (author_id) REFERENCES Authors(author_id),
     FOREIGN KEY (publisher_id) REFERENCES Publisher(publisher_id)
 );
+
 
 -- Writes relationship set
 CREATE TABLE Writes (
     id                  INT             NOT NULL,
     author_id           INT             NOT NULL,
-    isbn                VARCHAR(25)     NOT NULL,
+    book_id             INT             NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (author_id) REFERENCES Authors(author_id),
-    FOREIGN KEY (isbn) REFERENCES Books(isbn)
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
 
 
@@ -84,11 +79,91 @@ CREATE TABLE Writes (
 CREATE TABLE Orders (
     order_id            INT             NOT NULL,
     customer_id         INT             NOT NULL,
-    isbn                VARCHAR(25)     NOT NULL,
+    book_id             INT             NOT NULL,
     price               FLOAT           NOT NULL,
     time                DATE            NOT NULL,
 
     PRIMARY KEY (order_id),
     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
-    FOREIGN KEY (isbn) REFERENCES Books(isbn)
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
+
+
+-- Insert People into database
+INSERT ALL
+    INTO People (person_id, ssn, firstname, lastname, address)
+        VALUES (2314, '111-22-3333', 'Alexander', 'McQueen', ADDRESS_T('10 School St.', 'Devens', 'MA', '03020'))
+    INTO People (person_id, ssn, firstname, lastname, address)
+        VALUES (2315, '213-11-2323', 'Elizabeth', 'Blomqvist', ADDRESS_T('Main St.', 'Boston', 'MA', '01231'))
+    INTO People (person_id, ssn, firstname, lastname, address)
+        VALUES (1010, '542-55-2377', 'Tony', 'Stark', ADDRESS_T('1 Avengers Sq', 'New York', 'NY', '07023'))
+    INTO People (person_id, ssn, firstname, lastname, address)
+        VALUES (8383, '432-56-2321', 'Steve', 'Nash', ADDRESS_T('6531 Buckets St', 'San Diego', 'CA', '72043'))
+    INTO People (person_id, ssn, firstname, lastname, address)
+        VALUES (6283, '211-63-5247', 'Stephen', 'King', ADDRESS_T('91 Ackers Boulevard', 'Gotham', 'NJ', '13994'))
+    INTO People (person_id, ssn, firstname, lastname, address)
+        VALUES (7116, '544-34-5637', 'Maile', 'Donaldson', ADDRESS_T('882 Sit Avenue', 'Rotterdam', 'LV', '54222'))
+    INTO People (person_id, ssn, firstname, lastname, address)
+        VALUES (1183, '322-63-5247', 'Octavia', 'Butler', ADDRESS_T('44 Bowling Lane', 'Jersey City', 'NJ', '13994'))
+    INTO People (person_id, ssn, firstname, lastname, address)
+        VALUES (8482, '889-52-1121', 'Emmanuel', 'Adebayor', ADDRESS_T('2686 Bibendum St, Apt 12', 'Salt Lake City', 'UT', '89122'))
+    INTO People (person_id, ssn, firstname, lastname, address)
+        VALUES (7771, '213-63-6611', 'Bartlett', 'Giamatti', ADDRESS_T('443 East Gardner Rd', 'Naperville', 'IL', '09331'))
+    INTO People (person_id, ssn, firstname, lastname, address)
+        VALUES (7217, '777-01-1100', 'Toni', 'Morrison', ADDRESS_T('1 Heaven Lane', 'Los Angeles', 'CA', '89923'))
+SELECT 1 FROM DUAL;
+
+
+-- Insert authors into Authors table
+INSERT ALL
+    INTO Authors (author_id, person_id) VALUES (151245, 6283)  -- Stephen King
+    INTO Authors (author_id, person_id) VALUES (435222, 2315)  -- Beth Blomqvist
+    INTO Authors (author_id, person_id) VALUES (328818, 7217)  -- T. Morrison
+    INTO Authors (author_id, person_id) VALUES (123315, 8482)  -- E. Adebayor
+    INTO Authors (author_id, person_id) VALUES (453112, 1183)  -- Octavia Butler
+SELECT 1 FROM DUAL;
+
+
+-- Dummy Customers (not literally :) )
+INSERT ALL
+    INTO Customers (customer_id, person_id) VALUES (55, 7771)
+    INTO Customers (customer_id, person_id) VALUES (93, 8482)
+    INTO Customers (customer_id, person_id) VALUES (83, 7116)
+    INTO Customers (customer_id, person_id) VALUES (46, 1010)
+SELECT 1 FROM DUAL;
+
+
+-- Add some publishers
+INSERT ALL
+    INTO Publisher (publisher_id, name, address)
+        VALUES (432, 'Random House', ADDRESS_T('491 Dutton St', 'Lowellita', 'MA', 02323))
+    INTO Publisher (publisher_id, name, address)
+        VALUES (919, 'Hachette Book Group', ADDRESS_T('12 43W 13th St', 'New York City', 'NY', 05522))
+    INTO Publisher (publisher_id, name, address)
+        VALUES (623, 'Harper Collins', ADDRESS_T('8 Lumberg Drive', 'Lolapalooza', 'WA', 92344))
+    INTO Publisher (publisher_id, name, address)
+        VALUES (766, 'Macmillan', ADDRESS_T('7 Collins Lane', 'Franklin', 'MI', 44291))
+    INTO Publisher (publisher_id, name, address)
+        VALUES (221, 'Simon and Schuster', ADDRESS_T('9898 Winnnow Circle', 'Seattle', 'QA', 89892))
+SELECT 1 FROM DUAL;
+
+
+-- Add some books
+INSERT ALL
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (3, '978-0-2257-7600-3', 'The Lost City of Culyan', 15.60, 435222, 432)
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (5, '978-5-0072-6605-5', 'The Hunger Games', 12.99, 123315, 623)
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (6, '978-0-743-26886-7', 'The Great Gasby', 14.99, 435222, 221)
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (8, '978-0-532-05686-5', 'Kindred', 10.99, 453112, 766)
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (2, '978-2-9753-4360-3', 'The Shining', 11.99, 151245, 766)
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (4, '978-2-5942-1677-7', 'It', 8.99, 151245, 919)
+    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
+        VALUES (7, '978-0-532-05256-5', 'Pride and Prejudice', 13.99, 435222, 623)
+SELECT 1 FROM DUAL;
+
+-- Orders
