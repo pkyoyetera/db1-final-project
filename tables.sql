@@ -1,4 +1,3 @@
-
 -- What makes an address?
 CREATE OR REPLACE TYPE ADDRESS_T AS OBJECT (
     street              VARCHAR(40),
@@ -6,7 +5,7 @@ CREATE OR REPLACE TYPE ADDRESS_T AS OBJECT (
     state               CHAR(2),
     zip_code            CHAR(5)
 ) FINAL;
-
+/
 
 CREATE TABLE People (
     person_id           INT                 NOT NULL,
@@ -183,5 +182,7 @@ INSERT ALL
         VALUES (15, 46, 7, 13.99, TO_DATE('26-APR-19 16:17:18', 'dd-mon-yyyy hh24:mi::ss'))
     INTO Orders (order_id, customer_id, book_id, paid, time)
         VALUES (16, 46, 5, 12.99, TO_DATE('30-APR-21 08:30:54', 'dd-mon-yyyy hh24:mi::ss'))
+	INTO Orders (order_id, customer_id, book_id, paid, time)
+        VALUES (17, 55, 5, 12.99, TO_DATE('30-MAY-21 12:30:54', 'dd-mon-yyyy hh24:mi::ss'))
 
 SELECT 1 FROM DUAL;
