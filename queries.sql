@@ -81,11 +81,5 @@ SET price = price + 2
 WHERE price < 10;
 
 /*10. Delete publishers and books they have published who are in Chicago. */
-DELETE books.*, publishers.*
-FROM books
-INNER JOIN publishers
-ON books.publisher_id = publisher.publisher_id
-WHERE publisher.city = "Chicago";
-
-DELETE FROM publisher
-WHERE address.city = 'Chicago';
+DELETE FROM publisher p
+WHERE p.address.city = 'Chicago';
