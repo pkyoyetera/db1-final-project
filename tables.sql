@@ -1,3 +1,6 @@
+-- If this is creating difficulties, add a '/' after the type creation, then run the rest of the creation/insertion statements
+-- Additionally, please run `set sqlblanklines on`, as we use whitespace to make the file more readable.
+
 -- What makes an address?
 CREATE OR REPLACE TYPE ADDRESS_T AS OBJECT (
     street              VARCHAR(40),
@@ -5,7 +8,6 @@ CREATE OR REPLACE TYPE ADDRESS_T AS OBJECT (
     state               CHAR(2),
     zip_code            CHAR(5)
 ) FINAL;
--- If this is creating difficulties, add a '/' after the type creation, then run the rest of the creation/insertion statements.
 
 CREATE TABLE People (
     person_id           INT                 NOT NULL,
