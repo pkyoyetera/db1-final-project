@@ -54,11 +54,9 @@ CREATE TABLE Books (
     isbn                VARCHAR(17)     NOT NULL,
     title               VARCHAR(50)     NOT NULL,
     price               FLOAT,
-    author_id           INT,
     publisher_id        INT,
 
     CONSTRAINT pk_books PRIMARY KEY (book_id),
-    FOREIGN KEY (author_id) REFERENCES Authors(author_id),
     FOREIGN KEY (publisher_id) REFERENCES Publisher(publisher_id)
 );
 
@@ -150,22 +148,39 @@ SELECT 1 FROM DUAL;
 
 -- Add some books
 INSERT ALL
-    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
-        VALUES (3, '978-0-2257-7600-3', 'The Lost City of Culyan', 15.60, 435222, 432)
-    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
-        VALUES (5, '978-5-0072-6605-5', 'The Hunger Games', 12.99, 123315, 623)
-    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
-        VALUES (6, '978-0-743-26886-7', 'The Great Gatsby', 14.99, 435222, 221)
-    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
-        VALUES (8, '978-0-532-05686-5', 'Kindred', 10.99, 453112, 766)
-    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
-        VALUES (2, '978-2-9753-4360-3', 'The Shining', 11.99, 151245, 766)
-    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
-        VALUES (4, '978-2-5942-1677-7', 'It', 8.99, 151245, 919)
-    INTO Books (book_id, isbn, title, price, author_id, publisher_id)
-        VALUES (7, '978-0-532-05256-5', 'Pride and Prejudice', 13.99, 435222, 623)
+    INTO Books (book_id, isbn, title, price, publisher_id)
+        VALUES (3, '978-0-2257-7600-3', 'The Lost City of Culyan', 15.60, 432)
+    INTO Books (book_id, isbn, title, price, publisher_id)
+        VALUES (5, '978-5-0072-6605-5', 'The Hunger Games', 12.99, 623)
+    INTO Books (book_id, isbn, title, price, publisher_id)
+        VALUES (6, '978-0-743-26886-7', 'The Great Gatsby', 14.99, 221)
+    INTO Books (book_id, isbn, title, price, publisher_id)
+        VALUES (8, '978-0-532-05686-5', 'Kindred', 10.99, 766)
+    INTO Books (book_id, isbn, title, price, publisher_id)
+        VALUES (2, '978-2-9753-4360-3', 'The Shining', 11.99, 766)
+    INTO Books (book_id, isbn, title, price, publisher_id)
+        VALUES (4, '978-2-5942-1677-7', 'It', 8.99, 919)
+    INTO Books (book_id, isbn, title, price, publisher_id)
+        VALUES (7, '978-0-532-05256-5', 'Pride and Prejudice', 13.99, 623)
 SELECT 1 FROM DUAL;
 
+
+INSERT ALL
+    INTO Writes (id, author_id, book_id)
+        VALUES (11, 435222, 3)
+    INTO Writes (id, author_id, book_id)
+        VALUES (12, 123315, 5)
+    INTO Writes (id, author_id, book_id)
+        VALUES (13, 435222, 6)
+    INTO Writes (id, author_id, book_id)
+        VALUES (14, 453112, 8)
+    INTO Writes (id, author_id, book_id)
+        VALUES (15, 151245, 2)
+    INTO Writes (id, author_id, book_id)
+        VALUES (16, 151245, 4)
+    INTO Writes (id, author_id, book_id)
+        VALUES (17, 435222, 7)
+SELECT 1 FROM DUAL;
 
 -- Orders
 INSERT ALL
