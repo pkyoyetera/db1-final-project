@@ -109,6 +109,10 @@ INSERT ALL
         VALUES (7771, '213-63-6611', 'Bartlett', 'Giamatti', ADDRESS_T('443 East Gardner Rd', 'Naperville', 'IL', '09331'))
     INTO People (person_id, ssn, firstname, lastname, address)
         VALUES (7217, '777-01-1100', 'Toni', 'Morrison', ADDRESS_T('1 Heaven Lane', 'Los Angeles', 'CA', '89923'))
+    INTO People (person_id, ssn, firstname, lastname, address)
+        VALUES (4414, '121-34-6565', 'Jill', 'McCorkle', ADDRESS_T('12 Brimbury St', 'San Francisco', 'CA', '89923'))
+    INTO People (person_id, ssn, firstname, lastname, address)
+        VALUES (5117, '199-21-1333', 'Kate', 'Atkinson', ADDRESS_T('113 Main St', 'Albuquerque', 'NM', 67126))
 SELECT 1 FROM DUAL;
 
 
@@ -119,6 +123,8 @@ INSERT ALL
     INTO Authors (author_id, person_id) VALUES (328818, 7217)  -- T. Morrison
     INTO Authors (author_id, person_id) VALUES (123315, 8482)  -- E. Adebayor
     INTO Authors (author_id, person_id) VALUES (453112, 1183)  -- Octavia Butler
+    INTO Authors (author_id, person_id) VALUES (212121, 4414)  -- Jill M
+    INTO Authors (author_id, person_id) VALUES (343434, 5117)  -- Kate A
 SELECT 1 FROM DUAL;
 
 
@@ -164,6 +170,10 @@ INSERT ALL
         VALUES (7, '978-0-532-05256-5', 'Pride and Prejudice', 23.99, 623)
     INTO Books (book_id, isbn, title, price, publisher_id)
         VALUES (11, '978-7-8114-4773-6', 'On The Road', 17.99, 919)
+    INTO Books (book_id, isbn, title, price, publisher_id)
+        VALUES (12, '978-7-6360-9428-3', 'Life After Life', 7.99, 766)
+    INTO Books (book_id, isbn, title, price, publisher_id)
+        VALUES (13, '978-9-3350-0035-0', 'Life After Life', 26.75, 221)
 SELECT 1 FROM DUAL;
 
 
@@ -182,6 +192,10 @@ INSERT ALL
         VALUES (16, 151245, 4)
     INTO Writes (id, author_id, book_id)
         VALUES (17, 435222, 7)
+    INTO Writes (id, author_id, book_id)
+        VALUES (18, 212121, 13)
+    INTO Writes (id, author_id, book_id)
+        VALUES (19, 343434, 12)
 SELECT 1 FROM DUAL;
 
 -- Orders
