@@ -195,6 +195,8 @@ INSERT ALL
     INTO Writes (id, author_id, book_id)
         VALUES (18, 212121, 13)
     INTO Writes (id, author_id, book_id)
+        VALUES (21, 123315, 11)
+    INTO Writes (id, author_id, book_id)
         VALUES (19, 343434, 12)
 SELECT 1 FROM DUAL;
 
