@@ -155,7 +155,7 @@ INSERT ALL
     INTO Books (book_id, isbn, title, price, author_id, publisher_id)
         VALUES (5, '978-5-0072-6605-5', 'The Hunger Games', 12.99, 123315, 623)
     INTO Books (book_id, isbn, title, price, author_id, publisher_id)
-        VALUES (6, '978-0-743-26886-7', 'The Great Gasby', 14.99, 435222, 221)
+        VALUES (6, '978-0-743-26886-7', 'The Great Gatsby', 14.99, 435222, 221)
     INTO Books (book_id, isbn, title, price, author_id, publisher_id)
         VALUES (8, '978-0-532-05686-5', 'Kindred', 10.99, 453112, 766)
     INTO Books (book_id, isbn, title, price, author_id, publisher_id)
@@ -166,4 +166,22 @@ INSERT ALL
         VALUES (7, '978-0-532-05256-5', 'Pride and Prejudice', 13.99, 435222, 623)
 SELECT 1 FROM DUAL;
 
+
 -- Orders
+INSERT ALL
+    INTO Orders (order_id, customer_id, book_id, price, time)
+        VALUES (10, 55, 3, 15.60, TO_DATE('01-JAN-17 13:11:33', 'dd-mon-yyyy hh24:mi::ss'))
+    INTO Orders (order_id, customer_id, book_id, price, time)
+        VALUES (11, 55, 6, 14.99, TO_DATE('02-FEB-17 10:00:00', 'dd-mon-yyyy hh24:mi::ss'))
+    INTO Orders (order_id, customer_id, book_id, price, time)
+        VALUES (12, 93, 8, 10.99, TO_DATE('03-FEB-17 11:00:00', 'dd-mon-yyyy hh24:mi::ss'))
+    INTO Orders (order_id, customer_id, book_id, price, time)
+        VALUES (13, 83, 2, 11.99, TO_DATE('05-MAR-17 09:05:00', 'dd-mon-yyyy hh24:mi::ss'))
+    INTO Orders (order_id, customer_id, book_id, price, time)
+        VALUES (14, 83, 4,  8.99, TO_DATE('19-MAR-17 14:00:10', 'dd-mon-yyyy hh24:mi::ss'))
+    INTO Orders (order_id, customer_id, book_id, price, time)
+        VALUES (15, 46, 7, 13.99, TO_DATE('26-APR-17 16:17:18', 'dd-mon-yyyy hh24:mi::ss'))
+    INTO Orders (order_id, customer_id, book_id, price, time)
+        VALUES (16, 46, 5, 12.99, TO_DATE('30-APR-17 08:30:54', 'dd-mon-yyyy hh24:mi::ss'))
+
+SELECT 1 FROM DUAL;
