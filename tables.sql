@@ -72,7 +72,7 @@ CREATE TABLE Orders (
 
     PRIMARY KEY (order_id),
     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
-    FOREIGN KEY (book_id) REFERENCES Books(book_id)
+    FOREIGN KEY (book_id) REFERENCES Books(book_id) ON DELETE CASCADE
 );
 
 
@@ -184,5 +184,4 @@ INSERT ALL
         VALUES (16, 46, 5, 12.99, TO_DATE('30-APR-21 08:30:54', 'dd-mon-yyyy hh24:mi::ss'))
 	INTO Orders (order_id, customer_id, book_id, paid, time)
         VALUES (17, 55, 5, 12.99, TO_DATE('30-MAY-21 12:30:54', 'dd-mon-yyyy hh24:mi::ss'))
-
 SELECT 1 FROM DUAL;
