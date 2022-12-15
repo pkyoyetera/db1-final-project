@@ -161,7 +161,7 @@ INSERT ALL
     INTO Books (book_id, isbn, title, price, publisher_id)
         VALUES (4, '978-2-5942-1677-7', 'It', 8.99, 919)
     INTO Books (book_id, isbn, title, price, publisher_id)
-        VALUES (7, '978-0-532-05256-5', 'Pride and Prejudice', 13.99, 623)
+        VALUES (7, '978-0-532-05256-5', 'Pride and Prejudice', 23.99, 623)
     INTO Books (book_id, isbn, title, price, publisher_id)
         VALUES (11, '978-7-8114-4773-6', 'On The Road', 17.99, 919)
 SELECT 1 FROM DUAL;
