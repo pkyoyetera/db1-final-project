@@ -71,7 +71,7 @@ CREATE TABLE Orders (
     time                DATE            NOT NULL,
 
     PRIMARY KEY (order_id),
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE CASCADE,
     FOREIGN KEY (book_id) REFERENCES Books(book_id) ON DELETE CASCADE
 );
 
