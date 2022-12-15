@@ -138,7 +138,7 @@ INSERT ALL
     INTO Publisher (publisher_id, name, address)
         VALUES (919, 'Hachette Book Group', ADDRESS_T('12 43W 13th St', 'New York City', 'NY', 05522))
     INTO Publisher (publisher_id, name, address)
-        VALUES (623, 'Harper Collins', ADDRESS_T('8 Lumberg Drive', 'Lolapalooza', 'WA', 92344))
+        VALUES (623, 'Harper Collins', ADDRESS_T('8 Lumberg Drive', 'Chicago', 'IL', 92344))
     INTO Publisher (publisher_id, name, address)
         VALUES (766, 'Macmillan', ADDRESS_T('7 Collins Lane', 'Franklin', 'MI', 44291))
     INTO Publisher (publisher_id, name, address)
