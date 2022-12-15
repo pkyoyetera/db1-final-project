@@ -4,22 +4,21 @@ Patrick Kyoyetera and Matt Waterman
 */
 
 /*1. List titles of all books in ascending order. */
-SELECT title FROM books ORDER BY ASC;
+SELECT title FROM books ORDER BY title ASC;
 
 /*2. Find the name of the author who wrote the book titled "On The Road". */
-SELECT name FROM people WHERE ssn = (
-	SELECT ssn FROM people
-	JOIN writes on author_id
-	JOIN books on isbn
-	WHERE title = "On The Road"
-	)
+SELECT firstname,lastname FROM people
+JOIN authors ON people.person_id = authors.person_id
+JOIN writes ON authors.author_id = writes.author_id
+JOIN books ON writes.book_id = books.book_id
+WHERE title = 'On The Road';
 
 /*3. List the title and author of books whose price is greater than $20. List your result in the 
 ascending order of the price. */
-SELECT title, name, price
+SELECT title, writes.author_id, price
 FROM books
-JOIN writes on author_id 
-JOIN authors on author_id
+JOIN writes on books.author_id = writes.author_id
+JOIN authors on writes.author_id = authors.author_id
 WHERE price > 20;
 
 /*4. Find the books that have the same title but different author(s). Each book title should 
@@ -30,58 +29,49 @@ WHERE b1.title = b2.title AND b1.author_id <> b2.author_id AND b1.isbn <> b2.isb
 
 
 /*5. Find the publisher that has the largest revenue in 2021. */
-SELECT name 
-FROM publisher
-HAVING publisher_id = (SELECT publisher_id 
-		FROM orders
-		JOIN books ON isbn
-		GROUP BY publisher_id
-		HAVING SUM(price) = MAX(
-			SELECT SUM(price) 
-			FROM orders
-			JOIN books ON isbn
-			GROUP BY publisher_id));
+SELECT publisher_id, SUM(orders.price) as revenue
+FROM books
+JOIN orders on books.book_id = orders.book_id
+WHERE EXTRACT(year FROM time) = 2021
+GROUP BY publisher_id
+ORDER BY revenue DESC
+FETCH FIRST ROW ONLY;
 
 
 /*6. List the title and price of all books written by the author of the best-selling book of 2021 
 (the book that has been sold the most number of copies in 2021). */
-
 SELECT title, price
 FROM books
-WHERE author_id = 
+WHERE author_id IN( 
 	SELECT author_id 
 	FROM books
-	WHERE isbn = 
-		SELECT isbn
+	WHERE book_id IN(
+		SELECT book_id
 		FROM orders
-		GROUP BY isbn
-		HAVING COUNT(isbn) = MAX(
-			SELECT COUNT(isbn)
+		GROUP BY book_id
+		HAVING COUNT(book_id) = (
+			SELECT MAX(COUNT(book_id))
 			FROM orders
-			GROUP BY isbn;
+			GROUP BY book_id)));
+			
+			
 
-/*7. Find the customer who has purchased every book written by Stephen King. */
-
-SELECT name
-FROM customers
-WHERE customer_id = 
-	SELECT customer_id 
+/*7. Find the customer who has purchased every book written by Stephen King. */			
+SELECT firstname, lastname
+FROM people
+JOIN customers ON people.person_id = customers.person_id
+WHERE NOT EXISTS (
+	SELECT books.book_id
+	FROM books
+	JOIN writes ON books.book_id = writes.book_id
+	JOIN authors ON writes.author_id = authors.author_id
+	JOIN people on authors.person_id = people.person_id
+	WHERE people.firstname = 'Stephen' AND people.lastname = 'King'
+	MINUS
+	SELECT orders.book_id
 	FROM orders
-	WHERE isbn IN(
-		SELECT isbn
-		FROM books
-		WHERE author_id = (
-			SELECT author_id 
-			FROM authors
-			WHERE name = "Stephen King"))
-	GROUP BY customer_id
-	HAVING COUNT isbn = (
-		SELECT COUNT(isbn)
-		FROM books
-		WHERE author_id = (
-			SELECT author_id 
-			FROM authors
-			WHERE name = "Stephen King"))
+	WHERE customer_id = customers.customer_id);	
+
 
 /*8. Insert a new author. */
 INSERT INTO
@@ -106,4 +96,4 @@ DELETE books.*, publishers.*
 FROM books
 INNER JOIN publishers
 ON books.publisher_id = publisher.publisher_id
-WHERE publisher.city = "Chicago"
+WHERE publisher.city = "Chicago";
